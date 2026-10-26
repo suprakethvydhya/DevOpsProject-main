@@ -2,98 +2,135 @@
 
 Built with Playwright, Axios, Nodemailer, dotenv, PizZip, and Docxtemplater.
 
-The current project automates LinkedIn post searching, intelligent candidate filtering, resume tailoring, and email dispatching for recruiter outreach.
+This project automates LinkedIn post searching, candidate filtering, resume tailoring, and email dispatching for recruiter outreach.
 
 ## Features
-1. **Multi-Domain & Role Search Presets**: Built-in support for multiple domains (`JAVA`, `WEB`, `QA`, `PYTHON`, `DEVOPS`, `DOTNET`, `MOBILE`, `CUSTOM`).
-   - E.g. **Web Development** searches across *Web Developer, PHP Developer, Flutter Developer, Frontend Developer, React Developer, Full Stack Developer*, etc.
-   - E.g. **Java Ecosystem** searches across *Java Developer, Java Backend, Java Full Stack, Swing Developer, QA Engineer, Software Tester*, etc.
-2. **Multi-Query LinkedIn Search Engine**: Overcomes LinkedIn query complexity limits by partitioning role keywords into concise search queries and running them sequentially until target application count is achieved.
-3. **Dynamic Role & Skill Extraction**: Automatically detects exact role titles and extracts technical skills from job posts to dynamically generate tailored `MyResume.docx` resumes.
-4. **Email Extraction & API Fallback**: Scrapes emails from post text/mailto links, with SignalHire API key-rotation fallback for profiles.
-5. **Smart Filtering**: Configurable experience year limits, industry/domain filters, and post deduplication.
-6. **Session Persistence**: Uses Playwright `storageState` (`tests/login.json`) to prevent repeated manual logins.
 
----
+1. **Multi-Domain & Role Search Presets:** Supports JAVA, WEB, QA, PYTHON, DEVOPS, DOTNET, MOBILE, and CUSTOM domains.
+
+2. **Multi-Query LinkedIn Search Engine:** Splits role keywords into smaller search queries and runs them sequentially until the target application count is reached.
+
+3. **Dynamic Role & Skill Extraction:** Detects role titles and extracts technical skills from job posts to generate tailored resumes using `MyResume.docx`.
+
+4. **Email Extraction & API Fallback:** Extracts emails from post text and mailto links, with SignalHire API fallback for profiles.
+
+5. **Smart Filtering:** Supports configurable experience limits, domain filters, and duplicate-post prevention.
+
+6. **Session Persistence:** Uses Playwright `storageState` (`tests/login.json`) to reduce repeated manual logins.
 
 ## Setup
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+### 1. Install dependencies
 
-2. **Configure `.env`**:
-   Create a `.env` file containing:
-   ```env
-   EMAIL=your_email@gmail.com
-   EMAIL_PASS=your_google_app_password
-   SIGNALHIRE_KEYS=key1,key2,key3
-   ```
+```bash
+npm install
+```
 
-3. **Generate LinkedIn Session (One-Time Login)**:
-   ```bash
-   node tests/login.js
-   ```
+### 2. Configure environment variables
 
----
+Create a `.env` file:
+
+```env
+EMAIL=your_email@gmail.com
+EMAIL_PASS=your_google_app_password
+SIGNALHIRE_KEYS=key1,key2,key3
+```
+
+Keep your `.env` file private. Never commit passwords or API keys to GitHub.
+
+### 3. Generate a LinkedIn session
+
+```bash
+node tests/login.js
+```
+
+Complete the login in the browser.
 
 ## Domain Configuration
 
-Open [linkedin-auto.spec.js](file:///c:/Users/Vaishak/LinkedIn%20Automation/tests/linkedin-auto.spec.js) and configure `FILTER_CONFIG`:
+Open `tests/linkedin-auto.spec.js` and configure `FILTER_CONFIG`:
 
 ```javascript
 const FILTER_CONFIG = {
-    // Select domain preset: 'JAVA' | 'WEB' | 'QA' | 'PYTHON' | 'DEVOPS' | 'DOTNET' | 'MOBILE' | 'CUSTOM'
-    // Or combine multiple: ['JAVA', 'QA'] or ['WEB', 'MOBILE']
-    activeDomain: 'WEB', // Switch to 'JAVA', 'WEB', 'QA', etc.
-
-    // Number of successful matching applications to send
+    activeDomain: 'WEB',
     targetApplicationsCount: 2,
-
-    // Max posts to inspect per query pass
     maxPostsToInspectPerQuery: 25,
-
-    // Max experience years accepted (rejects posts requiring more years)
     maxExperienceYears: 3,
     enableExperienceFilter: true,
-
-    // Industry / Domain filter toggle
     enableDomainFilter: false,
-
-    // Search query modifiers
     searchModifiers: 'C2C USA -intern -entry -fulltime -w2 -hotlist -bench -sales',
-
-    // LinkedIn date filter: 'past-24h' or 'past-week'
     datePosted: 'past-24h'
 };
 ```
 
----
+Available domain presets include `JAVA`, `WEB`, `QA`, `PYTHON`, `DEVOPS`, `DOTNET`, `MOBILE`, and `CUSTOM`.
+
+You can also combine presets, for example:
+
+```javascript
+activeDomain: ['JAVA', 'QA']
+```
 
 ## Running the Automation
 
 Run the Playwright test:
+
 ```bash
 npx playwright test tests/linkedin-auto.spec.js
 ```
-# Docker + Jenkins setup
 
-## One-time
-1. Log in to LinkedIn on your own machine: `node tests/login.js` (needs a visible browser,
-   so this step can NOT run in Docker/Jenkins). It creates `tests/login.json`.
-2. Generate the search query: `node search-keyword-builder.js` -> `tests/search-config.json`.
-   The query is global, so run it for the candidate you are about to use.
+## Docker and Jenkins Setup
 
-## Local Docker
-    docker compose build
-    CANDIDATE=2 docker compose run --rm linkedin-bot      # bash/macOS/Linux
-    $env:CANDIDATE=2; docker compose run --rm linkedin-bot   # PowerShell
+### One-time setup
 
-## Jenkins
-Requirements: Jenkins agent with Docker installed and the `jenkins` user in the docker group.
-Add the credentials listed at the top of the Jenkinsfile, put the repo (PRIVATE) in Git
-with resumes/, candidate_details/ and tests/search-config.json committed, then create a
-Pipeline job pointing at the Jenkinsfile. Use "Build with Parameters" to pick the candidate.
----
-*DISCLAIMER: This project is for demonstration and research purposes. Use responsibly and in accordance with LinkedIn's Terms of Service.*
+1. Log in to LinkedIn on your own machine:
+
+   ```bash
+   node tests/login.js
+   ```
+
+   This creates `tests/login.json`. The interactive login step requires a visible browser.
+
+2. Generate the search configuration:
+
+   ```bash
+   node search-keyword-builder.js
+   ```
+
+   This generates `tests/search-config.json`.
+
+### Local Docker
+
+Build the image:
+
+```bash
+docker compose build
+```
+
+Run the automation on macOS/Linux:
+
+```bash
+CANDIDATE=2 docker compose run --rm linkedin-bot
+```
+
+Run it in PowerShell:
+
+```powershell
+$env:CANDIDATE=2; docker compose run --rm linkedin-bot
+```
+
+### Jenkins
+
+Requirements:
+
+* A Jenkins agent with Docker installed.
+* The Jenkins user must have the necessary Docker permissions.
+* Configure the required credentials in Jenkins.
+* Configure the pipeline to use the repository's `Jenkinsfile`.
+* Use **Build with Parameters** to select the candidate.
+
+Review your repository and Jenkins configuration to ensure sensitive credentials and personal data are not committed.
+
+## Disclaimer
+
+This project is intended for demonstration and research purposes. Use responsibly and comply with LinkedIn's Terms of Service and applicable privacy requirements.
