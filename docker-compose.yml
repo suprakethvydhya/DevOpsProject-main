@@ -1,0 +1,19 @@
+# Local use:  CANDIDATE=2 docker compose run --rm linkedin-bot
+services:
+  linkedin-bot:
+    build: .
+    image: linkedin-automation:latest
+    env_file: .env                      # EMAIL, EMAIL_PASS, EXPLORIUM_API_KEY, ...
+    environment:
+      CANDIDATE: ${CANDIDATE:-1}
+    ipc: host                           # recommended by Playwright for Chromium
+    init: true
+    volumes:
+      - ./tests/login.json:/app/tests/login.json:ro
+      - ./tests/search-config.json:/app/tests/search-config.json:ro
+      - ./candidate_details:/app/candidate_details:ro
+      - ./resumes:/app/resumes            # writable: highlighted copy is created here
+      - linkedin-state:/state             # persists contacted.json between runs
+
+volumes:
+  linkedin-state:

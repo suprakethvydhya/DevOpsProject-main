@@ -1,0 +1,83 @@
+{
+  "skills": {
+    "Java": [
+      "Java",
+      "Java SE",
+      "J2EE"
+    ],
+    "Spring Boot": [
+      "Spring Boot",
+      "SpringBoot",
+      "Spring"
+    ],
+    "Django": [
+      "Django"
+    ],
+    "HTML": [
+      "HTML",
+      "HTML5"
+    ],
+    "CSS": [
+      "CSS",
+      "CSS3"
+    ],
+    "Python": [
+      "Python"
+    ],
+    "REST API": [
+      "REST",
+      "REST API",
+      "RESTful API",
+      "RESTful APIs"
+    ],
+    "SQL": [
+      "SQL"
+    ],
+    "MySQL": [
+      "MySQL"
+    ],
+    "PostgreSQL": [
+      "PostgreSQL"
+    ],
+    "Git": [
+      "Git"
+    ],
+    "GitHub": [
+      "GitHub"
+    ],
+    "Jenkins": [
+      "Jenkins"
+    ],
+    "Tableau": [
+      "Tableau"
+    ],
+    "R": [
+      "R",
+      "R Programming"
+    ],
+    "Microsoft Office": [
+      "MS Office",
+      "Microsoft Office"
+    ],
+    "Microsoft Excel": [
+      "MS Excel",
+      "Microsoft Excel"
+    ],
+    "Microsoft Word": [
+      "MS Word",
+      "Microsoft Word"
+    ],
+    "Swing": [
+      "Swing",
+      "Java Swing"
+    ]
+  },
+
+  "roles": [
+    "Java Developer",
+    "Java Backend Developer",
+    "Java Full Stack Developer",
+    "Java Engineer",
+    "Software Engineer"
+  ]
+}

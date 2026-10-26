@@ -1,0 +1,13 @@
+node_modules
+.env
+.git
+tests/login.json
+tests.zip
+test-results
+playwright-report
+resumes
+candidate_details
+job_descriptions
+*.docx
+*.pdf
+contacted.json

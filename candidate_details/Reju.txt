@@ -1,0 +1,13 @@
+Name: Reju Karkee
+E-Mail: rekarkee@gmail.com
+Phone:+1 (347) 465-7363 
+LinkedIn: https://www.linkedin.com/in/reju-karkee-190bb1218/
+Location: West Monroe, LA, US 
+Relocation: Yes
+Availability: Immediate
+Experience: 5+ years
+Expected Salary: C2C only (negotiable)
+Interview Availability: Immediate
+Education Details: Master of Science in Computer Science,Bachelor’s in Travel and Tourism Management 
+
+Expertise/Skill Sets:Python, SQL, PySpark, dbt, Snowflake, Azure Databricks, Azure Data Factory, Delta Lake, Delta Live Tables, Azure Data Lake Storage, Azure Synapse Analytics, Azure SQL, Apache Airflow, Talend, REST APIs, Power BI, Git, Azure DevOps, Data Governance, HIPAA

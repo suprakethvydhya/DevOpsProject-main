@@ -1,0 +1,8 @@
+{
+  "jobDescription": "Satyam Jha\nData Analyst | SQL | Power BI | Advanced Excel | Business Analysis | Reporting Automation\nWorking with flat CSV files is great for quick analysis, but real-world analytics requires structured, scalable database modeling. 📊\nI recently took the popular Superstore Sales dataset (9,994 flat transactional records) and redesigned it into a fully normalized Star Schema in MySQL. \nHere is what I built:\n🔹 Problem: A single flat table leads to heavy data redundancy, higher storage costs, and risk of data anomalies.\n🔹 Solution: Transformed the data into 1 central `fact_orders` table surrounded by 5 core dimension tables (`dim_customer`, `dim_address`, `dim_product`, `dim_product_category`, and `dim_date`).\n🔹 Automation: Wrote a custom MySQL Stored Procedure to dynamically populate the date dimension for time-intelligence reporting across 2014–2018.\n💡 Ready to Test: I have included both the raw dataset and the complete, runnable SQL scripts in the repo so you can clone it and run the normalization pipeline directly in your own environment!\n🛠 Tech Stack: MySQL | Database Normalization | SQL DDL/DML | VS Code\n📁 Full SQL code, dataset, and project walkthrough on GitHub: [https://lnkd.in/d2_tvZJN]\n#DataAnalytics #SQL #DataEngineering #DatabaseDesign #MySQL #DataModeling #Portfolio\n… more\n1/3\n​\n​\n​",
+  "postUrl": "https://lnkd.in/p/dHBQeaiA",
+  "posterName": "Satyam Jha Profile",
+  "posterUrl": "https://www.linkedin.com/in/satyam-jha-profile/",
+  "extractedAt": "2026-09-18T17:38:45.396Z",
+  "candidate": "Reju Karkee"
+}
